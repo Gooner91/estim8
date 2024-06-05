@@ -1,4 +1,5 @@
 import {App} from "@slack/bolt";
+import ngrok from "@ngrok/ngrok";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -8,6 +9,11 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   socketMode: false, // setting for now to false (no app token provided atm)
 });
+
+(async() => {
+  const listener = await ngrok.forward({addr: 3000, authtoken: process.env.NGROK_AUTH_TOKEN});
+  console.log(`Ingress established at: ${listener.url()}`);
+})();
 
 (async () => {
   try{

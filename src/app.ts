@@ -7,7 +7,8 @@ dotenv.config();
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
-  socketMode: false, // setting for now to false (no app token provided atm)
+  appToken: process.env.SLACK_SOCKET_TOKEN,
+  socketMode: true,
 });
 
 (async() => {

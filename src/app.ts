@@ -1,6 +1,7 @@
 import {App} from "@slack/bolt";
-import ngrok from "@ngrok/ngrok";
+// import ngrok from "@ngrok/ngrok";
 import * as dotenv from "dotenv";
+import registerListeners from "./listeners";
 
 dotenv.config();
 
@@ -11,14 +12,16 @@ const app = new App({
   socketMode: true,
 });
 
-(async() => {
-  const listener = await ngrok.forward({addr: 3000, authtoken: process.env.NGROK_AUTH_TOKEN});
-  console.log(`Ingress established at: ${listener.url()}`);
-})();
+// (async() => {
+//   const listener = await ngrok.forward({addr: 3000, authtoken: process.env.NGROK_AUTH_TOKEN});
+//   console.log(`Ingress established at: ${listener.url()}`);
+// })();
+registerListeners(app);
+
 
 (async () => {
   try{
-    await app.start(process.env.PORT || 3000);
+    await app.start();
     console.log("estim8 running via Bolt");
   }
   catch (error){

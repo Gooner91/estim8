@@ -9,17 +9,27 @@
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\" ",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "husky",
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.6.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "nodemon": "^3.1.2",
     "prettier": "^3.3.2",
     "ts-node": "^10.9.2",
